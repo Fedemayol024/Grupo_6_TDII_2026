@@ -63,8 +63,8 @@ graph TD
 
 ### 7. Integrantes
 * **Mayol Federico** - Legajo: 55764
-* **Machin Santino** - Legajo: [52797]
-* **Mamani Flores Carlos** - Legajo: [Completar]
+* **Machin Santino** - Legajo: [Completar]
+* **Mamani Flores Carlos** - Legajo: 52797
 * **Cusi Lucas Emanuel** - Legajo: [Completar]
 
 ### 8. Conclusión
