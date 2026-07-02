@@ -1,5 +1,13 @@
 # App 1.2: Secuenciador Bidireccional
 
+**Autor:** Mamani Flores Carlos
+
+**Legajo:** 52797 
+
+**Cátedra:** Técnicas Digitales 2  
+
+**Año:** 2026 
+
 ## Título y Objetivos
 **App 1.2: Secuenciador de LEDs Bidireccional**
 
