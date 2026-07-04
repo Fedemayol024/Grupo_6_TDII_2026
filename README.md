@@ -63,9 +63,9 @@ graph TD
 
 ### 7. Integrantes
 * **Mayol Federico** - Legajo: 55764
-* **Machin Santino** - Legajo: [53033]
+* **Machin Santino** - Legajo: 53033
 * **Mamani Flores Carlos** - Legajo: 52797
-* **Cusi Lucas Emanuel** - Legajo: [52769]
+* **Cusi Lucas Emanuel** - Legajo: 52769
 
 ### 8. Conclusión
 Este repositorio refleja el compromiso del Grupo 6 con el desarrollo de sistemas embebidos de alta calidad, promoviendo el orden, la reutilización de código mediante drivers propios y el aprendizaje continuo de la arquitectura ARM Cortex-M4.
