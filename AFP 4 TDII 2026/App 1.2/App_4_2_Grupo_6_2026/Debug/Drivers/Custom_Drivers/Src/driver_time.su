@@ -1,0 +1,5 @@
+../Drivers/Custom_Drivers/Src/driver_time.c:19:6:TIME_DelayMS	16	static
+../Drivers/Custom_Drivers/Src/driver_time.c:28:10:TIME_GetTicks	8	static
+../Drivers/Custom_Drivers/Src/driver_time.c:38:6:TIME_TimerIniciar	16	static
+../Drivers/Custom_Drivers/Src/driver_time.c:52:6:TIME_TimerExpirado	24	static
+../Drivers/Custom_Drivers/Src/driver_time.c:78:6:TIME_TimerDetener	16	static

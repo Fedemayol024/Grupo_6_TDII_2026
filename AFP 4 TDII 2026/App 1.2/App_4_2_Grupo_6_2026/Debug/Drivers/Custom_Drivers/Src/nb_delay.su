@@ -1,0 +1,3 @@
+../Drivers/Custom_Drivers/Src/nb_delay.c:25:6:nb_delay_init	16	static
+../Drivers/Custom_Drivers/Src/nb_delay.c:47:8:nb_delay_read	24	static
+../Drivers/Custom_Drivers/Src/nb_delay.c:88:6:nb_delay_write	16	static
