@@ -43,6 +43,9 @@ typedef enum{
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
+// Índices lógicos para identificar todos los botones a utilizar
+#define INDICE_BTN_USER 0
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -55,18 +58,14 @@ UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
 
-// Índices lógicos para identificar todos los botones a utilizar
-#define INDICE_BTN_USER 0
+
 
 // Tablas físicas asociadas a la estructura PAL de los drivers
-
-//Tabla para Botones
 static const BOTON_Hardware_t tabla_botones_hw[] = {
 		[INDICE_BTN_USER] = {USER_BTN_GPIO_Port, USER_BTN_Pin, BOTON_ACTIVO_ALTO}
 };
 static const uint8_t cant_botones = sizeof(tabla_botones_hw) / sizeof(tabla_botones_hw[0]);
 
-//Tabla para leds
 static const LED_Hardware_t tabla_leds_hardware[] = {
 		{LD1_GPIO_Port, LD1_Pin},
 		{LD2_GPIO_Port, LD2_Pin},
@@ -74,15 +73,18 @@ static const LED_Hardware_t tabla_leds_hardware[] = {
 };
 static const uint8_t total_leds = sizeof(tabla_leds_hardware) / sizeof(tabla_leds_hardware[0]);
 
+/* Base de tiempos configurables */
+static const tick_t tiempo_alternancia = 200U; // 200 ms por estado de la MEF
+static const tick_t tiempo_debounce = 50U;     // 50 ms de ventana antirrebote
 
 /* Variables de control de la MEF y secuencia */
-static const tick_t tiempo_alternancia = 200U; // 200 ms por estado
-static int8_t indice_led = 0;                  // Índice signed para soportar decrementos
-static Estado_t estado_mef = Estado_Encendido;  // Estado de la MEF
-static int8_t sentido = 1;                     // Sentido de giro: +1 (avance) o -1 (retroceso)
+static int8_t indice_led = 0;                  // Índice con signo para decremento seguro
+static Estado_t estado_mef = Estado_Encendido;
+static int8_t sentido = 1;                     // +1 (avance) o -1 (retroceso)
 
-/* Instancia del retardo no bloqueante */
+/* Instancias de temporización no bloqueante */
 static nb_delay_t delay_mef;
+static nb_delay_t delay_debounce;
 
 /* USER CODE END PV */
 
@@ -134,7 +136,10 @@ int main(void)
 	/* Inicialización de controladores de Capa 2 */
 	LED_Init(tabla_leds_hardware, total_leds);
 	BOTON_Init(tabla_botones_hw, cant_botones);
+
+	/* Inicialización de temporizadores no bloqueantes */
 	nb_delay_init(&delay_mef, tiempo_alternancia);
+	nb_delay_init(&delay_debounce, tiempo_debounce);
 
 	/* USER CODE END 2 */
 
@@ -147,12 +152,15 @@ int main(void)
 		/* USER CODE BEGIN 3 */
 
 		/*
-		 * 1. Polling de alta velocidad del pulsador:
-		 * Al ser no bloqueante, se evalúa continuamente sin latencia ni pérdida de eventos.
+		 * 1. Polling con antirrebote no bloqueante:
+		 * Evalúa el flanco del pulsador cada 50 ms para ignorar el ruido mecánico.
 		 */
-		if (BOTON_DetectarFlancoPresionado(INDICE_BTN_USER))
+		if (nb_delay_read(&delay_debounce))
 		{
-			sentido = -sentido; // Inversión instantánea del sentido de giro
+			if (BOTON_DetectarFlancoPresionado(INDICE_BTN_USER))
+			{
+				sentido = -sentido; // Inversión limpia del sentido de giro
+			}
 		}
 
 		/*
