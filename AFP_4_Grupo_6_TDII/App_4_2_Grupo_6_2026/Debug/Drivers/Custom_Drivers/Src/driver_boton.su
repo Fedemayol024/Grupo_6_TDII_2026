@@ -1,0 +1,4 @@
+../Drivers/Custom_Drivers/Src/driver_boton.c:30:6:BOTON_Init	24	static
+../Drivers/Custom_Drivers/Src/driver_boton.c:50:6:BOTON_LeerPresionado	16	static
+../Drivers/Custom_Drivers/Src/driver_boton.c:63:6:BOTON_DetectarFlancoPresionado	24	static
+../Drivers/Custom_Drivers/Src/driver_boton.c:89:6:BOTON_DetectarFlancoSoltado	24	static

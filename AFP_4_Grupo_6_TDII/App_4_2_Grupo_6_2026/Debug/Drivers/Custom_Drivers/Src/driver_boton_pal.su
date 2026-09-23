@@ -1,0 +1,2 @@
+../Drivers/Custom_Drivers/Src/driver_boton_pal.c:26:6:BOTON_PAL_Init	16	static
+../Drivers/Custom_Drivers/Src/driver_boton_pal.c:39:6:BOTON_PAL_LeerPinFisico	24	static
