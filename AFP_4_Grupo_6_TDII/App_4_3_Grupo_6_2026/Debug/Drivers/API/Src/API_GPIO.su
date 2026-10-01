@@ -1,0 +1,4 @@
+../Drivers/API/Src/API_GPIO.c:11:6:WriteLedOn_GPIO	16	static
+../Drivers/API/Src/API_GPIO.c:16:6:WriteLedOff_GPIO	16	static
+../Drivers/API/Src/API_GPIO.c:21:6:ToggleLed_GPIO	16	static
+../Drivers/API/Src/API_GPIO.c:26:16:ReadButton_GPIO	8	static

@@ -1,0 +1,4 @@
+../Drivers/Custom_Drivers/Src/driver_led.c:27:6:LED_Init	3
+../Drivers/Custom_Drivers/Src/driver_led.c:45:6:LED_Write	2
+../Drivers/Custom_Drivers/Src/driver_led.c:57:6:LED_Toggle	2
+../Drivers/Custom_Drivers/Src/driver_led.c:69:9:LED_GetCount	1
