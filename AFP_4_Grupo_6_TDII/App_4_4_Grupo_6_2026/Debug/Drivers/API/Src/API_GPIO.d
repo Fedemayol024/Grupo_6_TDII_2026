@@ -25,7 +25,7 @@ Drivers/API/Src/API_GPIO.o: ../Drivers/API/Src/API_GPIO.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- C:/Users/emalu/STM32CubeIDE/workspace_1.19.0/AFP_4_App_1_4/Drivers/API/Inc/API_GPIO.h
+ C:/Users/emalu/Documents/GitHub/Grupo_6_TDII_2026/AFP_4_Grupo_6_TDII/App_4_4_Grupo_6_2026/Drivers/API/Inc/API_GPIO.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -53,4 +53,4 @@ Drivers/API/Src/API_GPIO.o: ../Drivers/API/Src/API_GPIO.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
-C:/Users/emalu/STM32CubeIDE/workspace_1.19.0/AFP_4_App_1_4/Drivers/API/Inc/API_GPIO.h:
+C:/Users/emalu/Documents/GitHub/Grupo_6_TDII_2026/AFP_4_Grupo_6_TDII/App_4_4_Grupo_6_2026/Drivers/API/Inc/API_GPIO.h:
