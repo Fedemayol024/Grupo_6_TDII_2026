@@ -19,6 +19,7 @@ typedef uint16_t led_t;
 typedef bool buttonStatus_t;
 
 /*Exported function prototypes********/
+void MX_GPIO_Init(void);
 void writeLedOn_GPIO(led_t LDx);
 void writeLedOff_GPIO(led_t LDx);
 void toggleLed_GPIO(led_t LDx);

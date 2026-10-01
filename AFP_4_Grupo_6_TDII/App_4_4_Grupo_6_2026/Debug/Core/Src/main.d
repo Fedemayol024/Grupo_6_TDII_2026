@@ -4,7 +4,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
- ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h \
+ ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xc.h \
  ../Drivers/CMSIS/Include/core_cm4.h \
  ../Drivers/CMSIS/Include/cmsis_version.h \
  ../Drivers/CMSIS/Include/cmsis_compiler.h \
@@ -25,15 +25,15 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- C:/Users/Carlitoz\ MF/Documents/Microcontroladores/Tecnicas_Digitales2-2026-Grupo/Grupo_6_TDII_2026/AFP_4_Grupo_6_TDII/App_4_4_Grupo_6_2026/Drivers/API/Inc/API_GPIO.h \
- C:/Users/Carlitoz\ MF/Documents/Microcontroladores/Tecnicas_Digitales2-2026-Grupo/Grupo_6_TDII_2026/AFP_4_Grupo_6_TDII/App_4_4_Grupo_6_2026/Drivers/API/Inc/API_Delay.h
+ C:/Users/emalu/STM32CubeIDE/workspace_1.19.0/AFP_4_App_1_4/Drivers/API/Inc/API_Delay.h \
+ C:/Users/emalu/STM32CubeIDE/workspace_1.19.0/AFP_4_App_1_4/Drivers/API/Inc/API_GPIO.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
-../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h:
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xc.h:
 ../Drivers/CMSIS/Include/core_cm4.h:
 ../Drivers/CMSIS/Include/cmsis_version.h:
 ../Drivers/CMSIS/Include/cmsis_compiler.h:
@@ -54,5 +54,5 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
-C:/Users/Carlitoz\ MF/Documents/Microcontroladores/Tecnicas_Digitales2-2026-Grupo/Grupo_6_TDII_2026/AFP_4_Grupo_6_TDII/App_4_4_Grupo_6_2026/Drivers/API/Inc/API_GPIO.h:
-C:/Users/Carlitoz\ MF/Documents/Microcontroladores/Tecnicas_Digitales2-2026-Grupo/Grupo_6_TDII_2026/AFP_4_Grupo_6_TDII/App_4_4_Grupo_6_2026/Drivers/API/Inc/API_Delay.h:
+C:/Users/emalu/STM32CubeIDE/workspace_1.19.0/AFP_4_App_1_4/Drivers/API/Inc/API_Delay.h:
+C:/Users/emalu/STM32CubeIDE/workspace_1.19.0/AFP_4_App_1_4/Drivers/API/Inc/API_GPIO.h:
