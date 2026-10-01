@@ -35,34 +35,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := AFP_4_App1.4
+BUILD_ARTIFACT_NAME := AFP_3_App1.4
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-AFP_4_App1.4.elf \
+AFP_3_App1.4.elf \
 
 MAP_FILES += \
-AFP_4_App1.4.map \
+AFP_3_App1.4.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-AFP_4_App1.4.list \
+AFP_3_App1.4.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: AFP_4_App1.4.elf secondary-outputs
+main-build: AFP_3_App1.4.elf secondary-outputs
 
 # Tool invocations
-AFP_4_App1.4.elf AFP_4_App1.4.map: $(OBJS) $(USER_OBJS) C:\Users\emalu\STM32CubeIDE\workspace_1.19.0\AFP_4_App1.4\STM32F401RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "AFP_4_App1.4.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\emalu\STM32CubeIDE\workspace_1.19.0\AFP_4_App1.4\STM32F401RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AFP_4_App1.4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+AFP_3_App1.4.elf AFP_3_App1.4.map: $(OBJS) $(USER_OBJS) C:\Users\emalu\STM32CubeIDE\workspace_1.19.0\AFP_3_App1.4\STM32F401RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "AFP_3_App1.4.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\emalu\STM32CubeIDE\workspace_1.19.0\AFP_3_App1.4\STM32F401RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AFP_3_App1.4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -71,14 +71,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-AFP_4_App1.4.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "AFP_4_App1.4.list"
+AFP_3_App1.4.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "AFP_3_App1.4.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) AFP_4_App1.4.elf AFP_4_App1.4.list AFP_4_App1.4.map default.size.stdout
+	-$(RM) AFP_3_App1.4.elf AFP_3_App1.4.list AFP_3_App1.4.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)

@@ -22,7 +22,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "API_GPIO.h"
-#include "API_Delay.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -32,9 +31,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define LED1 LED1_Pin
-#define LED2 LED2_Pin
-#define LED3 LED3_Pin
+#define LD1 LED1_Pin
+#define LD2 LED2_Pin
+#define LD3 LED3_Pin
+#define BT BT_Pin
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -46,11 +46,14 @@
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-
+uint8_t EAc,i;
+uint8_t EAn=1;
+uint16_t tiempos[]={100,250,500,1000};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+//void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
@@ -69,11 +72,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-led_t LEDS[]={LED1, LED2,LED3};
-delay_t delayLED;
-tick_t duration[]={100,250,500,1000};
-uint16_t i=0,EAc,EAn;
-delayInit(&delayLED,100);
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -82,7 +81,7 @@ delayInit(&delayLED,100);
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+uint16_t LEDS[3]={LD1,LD2,LD3};
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -106,24 +105,24 @@ delayInit(&delayLED,100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	if(delayRead(&delayLED))
-	{
-		toggleLed_GPIO(LED1|LED2|LED3);
-	}
-	EAc=readButton_GPIO();
-		  if (EAc==0&&EAn==1)
-			 {
-			  	  EAn=EAc;
-				  if(i<3)
-					  i++;
-				  else
-					  i=0;
-				  delayWrite(&delayLED,duration[i]);
-
-			  }
+	  uint8_t j;
+	  for(j=0;j<4;j++)
+	  toggleLed_GPIO(LEDS[j]);
+	  HAL_Delay(tiempos[i]);
+	  EAc=readButton_GPIO();
+	  HAL_Delay(20);
+	  if (EAc==0&&EAn==1)
+		 {
+		  	  EAn=EAc;
+			  if(i<3)
+				  i++;
 			  else
-				  EAn=readButton_GPIO();
-	  }
+				  i=0;
+
+		  }
+		  else
+			  EAn=readButton_GPIO();
+  }
   /* USER CODE END 3 */
 }
 
@@ -206,6 +205,11 @@ static void MX_USART2_UART_Init(void)
   * @param None
   * @retval None
   */
+
+
+/* USER CODE BEGIN 4 */
+
+/* USER CODE END 4 */
 
 /**
   * @brief  This function is executed in case of error occurrence.
