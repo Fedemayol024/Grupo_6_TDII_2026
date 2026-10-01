@@ -1,0 +1,9 @@
+14:55:44 **** Incremental Build of configuration Debug for project App_4_4_Grupo_6_2026 ****
+make -j4 all 
+arm-none-eabi-gcc -o "App_4_4_Grupo_6_2026.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\emalu\Documents\GitHub\Grupo_6_TDII_2026\AFP_4_Grupo_6_TDII\App_4_4_Grupo_6_2026\STM32F401RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="App_4_4_Grupo_6_2026.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+E:/Program Files/STM32CubeIDE_1.19.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Startup/startup_stm32f401retx.o:(.isr_vector+0x0): multiple definition of `g_pfnVectors'; ./Core/Startup/startup_stm32f401rctx.o:(.isr_vector+0x0): first defined here
+E:/Program Files/STM32CubeIDE_1.19.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Startup/startup_stm32f401retx.o: in function `NMI_Handler':
+C:/Users/emalu/Documents/GitHub/Grupo_6_TDII_2026/AFP_4_Grupo_6_TDII/App_4_4_Grupo_6_2026/Debug/../Core/Startup/startup_stm32f401retx.s:114: multiple definition of `Default_Handler'; ./Core/Startup/startup_stm32f401rctx.o:C:/Users/emalu/Documents/GitHub/Grupo_6_TDII_2026/AFP_4_Grupo_6_TDII/App_4_4_Grupo_6_2026/Debug/../Core/Startup/startup_stm32f401rctx.s:114: first defined here
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:65: App_4_4_Grupo_6_2026.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
