@@ -1,71 +1,88 @@
-# Técnicas Digitales 2 - UTN FRT
-## Grupo 6: Laboratorio de Sistemas Embebidos
+# Técnicas Digitales II — Grupo 6 — 2026
 
-### 1. Título y Objetivos
-**Título:** Repositorio de Prácticas y Proyectos - STM32F439ZI
-**Objetivo:** Este repositorio centraliza el desarrollo de aplicaciones embebidas realizadas por el Grupo 6. El propósito es aplicar los conceptos de la cátedra de Técnicas Digitales 2, utilizando la arquitectura STM32, el IDE STM32Cube y la capa de abstracción HAL de STMicroelectronics, manteniendo un estándar de calidad, robustez y documentación profesional.
+Repositorio grupal con los trabajos realizados para la materia **Técnicas Digitales II** de la carrera de Ingeniería Electrónica, **Universidad Tecnológica Nacional — Facultad Regional Tucumán (UTN FRT)**, ciclo lectivo **2026**.
 
-### 2. Especificaciones del Circuito
-* **Microcontrolador:** STM32F439ZI (Cortex-M4).
-* **Kit de Desarrollo:** NUCLEO-F439ZI.
-* **Entorno de Desarrollo:** STM32CubeIDE v1.9.
-* **Capa de Abstracción:** ST HAL (Hardware Abstraction Layer).
-* **Lenguaje:** C (Estándar C11).
+Aquí se publican las aplicaciones desarrolladas en cada **Actividad de Formación Práctica (AFP)**: firmware en C para placas STM32, escrito con STM32CubeIDE y la capa HAL de STMicroelectronics.
 
-### 3. Teoría de Operación
-El funcionamiento se basa en la configuración de periféricos de bajo nivel (GPIO, EXTI, Timers, ADC, UART, etc.) gestionados a través de la capa HAL. Se prioriza la configuración de relojes (RCC) y el manejo de interrupciones para garantizar un comportamiento en tiempo real eficiente. La lógica se separa estrictamente de la inicialización del hardware para asegurar la modularidad.
+## Integrantes
 
-### 4. Arquitectura del Software
-Para garantizar la escalabilidad y el orden, adoptamos una arquitectura de tres capas:
+| Integrante | Legajo | GitHub | Aplicación a cargo | Placa utilizada |
+| :--- | :---: | :--- | :---: | :--- |
+| Machin, Santino | 53033 | [@santinomachin](https://github.com/santinomachin) | App 1.1 | NUCLEO-F429ZI |
+| Mamani Flores, Carlos | 52797 | [@CarlitozMF](https://github.com/CarlitozMF) | App 1.2 | NUCLEO-F439ZI |
+| Mayol, Federico | 55764 | [@Fedemayol024](https://github.com/Fedemayol024) | App 1.3 | NUCLEO-F767ZI |
+| Cusi, Lucas Emanuel | 52769 | [@LucasEma912](https://github.com/LucasEma912) | App 1.4 | STM32F401RC |
+
+**Cátedra:** Ing. Rubén Darío Mansilla (Profesor) — Ing. Lucas Abdala (ATTP).
+
+## Cómo está organizado el trabajo
+
+La materia propone cuatro aplicaciones base (App 1.1 a App 1.4) que usan los LEDs y el pulsador de la placa. Cada integrante toma una y **la vuelve a entregar en cada AFP incorporando un concepto nuevo**, sin cambiar lo que la aplicación hace. Por eso la misma aplicación aparece en varias carpetas: lo que cambia entre una y otra es *cómo* está construida.
+
+```mermaid
+graph LR
+    A["AFP 0<br/>Aplicación base<br/>HAL directa + HAL_Delay"] --> B["AFP 3<br/>Driver GPIO propio<br/>main.c sin llamadas a la HAL de GPIO"]
+    B --> C["AFP 4<br/>Driver de retardos no bloqueantes<br/>se elimina HAL_Delay"]
+```
+
+| Actividad | Tema | Qué se incorpora | Carpeta |
+| :--- | :--- | :--- | :--- |
+| **AFP 0** | Entorno STM32CubeIDE y programación de microcontroladores | Las cuatro aplicaciones base, con HAL y retardos bloqueantes | [`AFP_0_Grupo_6_TDII`](AFP_0_Grupo_6_TDII) |
+| **AFP 3** | Creación de drivers | Driver GPIO propio; `main.c` deja de llamar a la HAL de GPIO | [`AFP_3_Grupo_6_TDII`](AFP_3_Grupo_6_TDII) |
+| **AFP 4** | Funciones no bloqueantes con SysTick | Driver de retardos no bloqueantes que reemplaza a `HAL_Delay()` | [`AFP_4_Grupo_6_TDII`](AFP_4_Grupo_6_TDII) |
+
+Cada carpeta tiene su propio README con los objetivos de la actividad, qué debe cumplir cada aplicación y quién la desarrolló.
+
+## Las cuatro aplicaciones
+
+| App | Qué hace | Responsable |
+| :---: | :--- | :--- |
+| **1.1** | Secuencia de los tres LEDs (verde → azul → rojo), 200 ms encendido y 200 ms apagado cada uno | Santino Machin |
+| **1.2** | La secuencia de la App 1.1, que invierte su sentido cada vez que se presiona el pulsador | Carlos Mamani Flores |
+| **1.3** | Cuatro secuencias distintas; el pulsador pasa de una a la siguiente | Federico Mayol |
+| **1.4** | Los tres LEDs parpadean juntos; el pulsador cambia el tiempo entre 100, 250, 500 y 1000 ms | Lucas Emanuel Cusi |
+
+Todas deben ser de carácter general: los LEDs se manejan con un vector, de modo que agregar más LEDs requiera cambios mínimos.
+
+## Estado de las entregas
+
+| App | AFP 0 | AFP 3 | AFP 4 |
+| :---: | :--- | :--- | :--- |
+| **1.1** | No está en el repositorio | [`App 1.1`](AFP_3_Grupo_6_TDII/App%201.1) | [`App_4_1_Grupo_6_2026`](AFP_4_Grupo_6_TDII/App_4_1_Grupo_6_2026) |
+| **1.2** | [`App_1_2_Grupo_6_2026`](AFP_0_Grupo_6_TDII/App_1_2_Grupo_6_2026) | [`App_3_2_Grupo_6_2026`](AFP_3_Grupo_6_TDII/App_3_2_Grupo_6_2026) | [`App_4_2_Grupo_6_2026`](AFP_4_Grupo_6_TDII/App_4_2_Grupo_6_2026) |
+| **1.3** | No está en el repositorio | [`App 1.3`](AFP_3_Grupo_6_TDII/App%201.3) | [`App_4_3_Grupo_6_2026`](AFP_4_Grupo_6_TDII/App_4_3_Grupo_6_2026) |
+| **1.4** | No está en el repositorio | [`App_3_4_Grupo_6_2026`](AFP_3_Grupo_6_TDII/App_3_4_Grupo_6_2026) | [`App_4_4_Grupo_6_2026`](AFP_4_Grupo_6_TDII/App_4_4_Grupo_6_2026) |
+
+## Convenciones del grupo
+
+**Nombres de carpetas.** Una carpeta por actividad (`AFP_N_Grupo_6_TDII`) y, dentro, una por aplicación con el formato `App_N_Y_Grupo_6_2026`, donde `N` es el número de AFP e `Y` el número de aplicación (1 a 4).
+
+**Arquitectura en capas.** La lógica de la aplicación no accede directamente al hardware:
 
 ```mermaid
 graph TD
-    subgraph Capa3 [Capa 3: Aplicación / FSM]
-        A[Lógica del Negocio / Máquina de Estados]
-    end
-    subgraph Capa2 [Capa 2: Drivers / Abstracción]
-        B[API Personalizada / Funciones de periféricos]
-    end
-    subgraph Capa1 [Capa 1: Mapeo de Hardware]
-        C[Configuración registros y HAL]
-    end
-    
-    A --> B
-    B --> C
-    C --> Hardware[STM32F439ZI]
+    A["Capa 3 — Aplicación<br/>main.c: secuencias y máquina de estados"] --> B["Capa 2 — Drivers propios<br/>GPIO y retardos no bloqueantes"]
+    B --> C["Capa 1 — HAL de ST y configuración generada por el .ioc"]
+    C --> D["Placa STM32"]
 ```
 
-* **Capa 1 (Mapeo de Hardware):** Inicialización de periféricos generada por el `.ioc` y configuración de registros.
-* **Capa 2 (Drivers/Abstracción):** APIs desarrolladas por el grupo que encapsulan funciones de la HAL, permitiendo que la lógica sea independiente de la plataforma.
-* **Capa 3 (Aplicación):** Lógica del sistema, procesos y estados.
-
-### 5. Detalles de Robustez
-* **Documentación:** Código documentado siguiendo el estándar **Doxygen**.
-* **Estándar:** Todos los archivos cumplen con el rótulo de autoría de la UTN FRT:
+**Documentación del código.** Los archivos propios llevan encabezado Doxygen:
 
 ```c
 /**
- * @file .c o .h
- * @author ALUMNO (UTN FRT)
- * @brief Implementación de...
- * @details Contiene la lógica de...
+ * @file    nombre.c
+ * @author  Apellido Nombre (UTN FRT)
+ * @brief   Qué implementa el archivo.
  * @version 1.0
- * @date 2026
+ * @date    2026
  */
 ```
-* **Manejo de Errores:** Implementación de callbacks de la HAL para la gestión de excepciones y errores de comunicación.
 
-### 6. Mapeo de Hardware
-| Periférico | Pin NUCLEO | Función |
-| :--- | :--- | :--- |
-| Ejemplo: LED LD2 | PA5 | Indicador de estado |
-| Pendiente | Pendiente | Pendiente |
+## Herramientas
 
-### 7. Integrantes
-* **Mayol Federico** - Legajo: 55764
-* **Machin Santino** - Legajo: 53033
-* **Mamani Flores Carlos** - Legajo: 52797
-* **Cusi Lucas Emanuel** - Legajo: 52769
+- **IDE:** STM32CubeIDE.
+- **Lenguaje:** C.
+- **Bibliotecas:** STM32Cube HAL (F4 o F7 según la placa) y CMSIS.
+- **Placas:** cada integrante trabaja con la suya (ver tabla de integrantes), por lo que cada proyecto trae su propio `.ioc` y script de enlazado.
 
-### 8. Conclusión
-Este repositorio refleja el compromiso del Grupo 6 con el desarrollo de sistemas embebidos de alta calidad, promoviendo el orden, la reutilización de código mediante drivers propios y el aprendizaje continuo de la arquitectura ARM Cortex-M4.
+Para abrir una aplicación: en STM32CubeIDE, `File → Import → Existing Projects into Workspace` y seleccionar la carpeta de la aplicación.
