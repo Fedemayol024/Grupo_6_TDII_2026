@@ -21,10 +21,10 @@ Estas cuatro aplicaciones son la base de las actividades siguientes: en la [AFP 
 
 | App | Responsable | Placa | Carpeta |
 | :---: | :--- | :--- | :--- |
-| 1.1 | Santino Machin | NUCLEO-F429ZI | No está en el repositorio |
+| 1.1 | Santino Machin | NUCLEO-F429ZI | Pendiente |
 | 1.2 | Carlos Mamani Flores | NUCLEO-F439ZI | [`App_1_2_Grupo_6_2026`](App_1_2_Grupo_6_2026) |
-| 1.3 | Federico Mayol | NUCLEO-F767ZI | No está en el repositorio |
-| 1.4 | Lucas Emanuel Cusi | STM32F401RC | No está en el repositorio |
+| 1.3 | Federico Mayol | NUCLEO-F767ZI | [`App_1_3_Grupo_6_2026`](App_1_3_Grupo_6_2026) |
+| 1.4 | Lucas Emanuel Cusi | STM32F401RC | [`App_1_4_Grupo_6_2026`](App_1_4_Grupo_6_2026) |
 
 ### App 1.1 — Secuencia de LEDs
 
@@ -51,4 +51,4 @@ Los tres LEDs parpadean juntos. Cada pulsación cambia el tiempo de alternancia:
 
 ## Pendientes
 
-- Subir las Apps 1.1, 1.3 y 1.4 en su versión base, con el nombre `App_1_Y_Grupo_6_2026`.
+- Subir la App 1.1 en su versión base, con el nombre `App_1_1_Grupo_6_2026`.
