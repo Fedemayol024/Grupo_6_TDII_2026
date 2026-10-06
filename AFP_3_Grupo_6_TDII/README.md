@@ -24,10 +24,10 @@ La consigna pide además que todo el grupo use **el mismo nombre para el driver 
 | :---: | :--- | :--- | :--- | :--- |
 | 1.1 | Santino Machin | NUCLEO-F429ZI | [`App 1.1`](App%201.1) | Todavía usa la HAL directamente |
 | 1.2 | Carlos Mamani Flores | NUCLEO-F439ZI | [`App_3_2_Grupo_6_2026`](App_3_2_Grupo_6_2026) | `driver_led`, `driver_boton`, `driver_time` y capa PAL |
-| 1.3 | Federico Mayol | NUCLEO-F767ZI | [`App 1.3`](App%201.3) | `API_GPIO` |
+| 1.3 | Federico Mayol | NUCLEO-F767ZI | [`App_3_3_Grupo_6_2026`](App_3_3_Grupo_6_2026) | `API_GPIO` |
 | 1.4 | Lucas Emanuel Cusi | STM32F401RC | [`App_3_4_Grupo_6_2026`](App_3_4_Grupo_6_2026) | `API_GPIO` |
 
-La carpeta [`App_3_3_Grupo_6_2026`](App_3_3_Grupo_6_2026) contiene solo el proyecto generado por STM32CubeIDE, sin la lógica de la aplicación. La versión funcional de la App 1.3 es la de la carpeta `App 1.3`.
+La carpeta `App 1.3` es una copia anterior de la App 1.3, sin los archivos de proyecto de STM32CubeIDE. La versión vigente es [`App_3_3_Grupo_6_2026`](App_3_3_Grupo_6_2026).
 
 ### Qué debe cumplir cada aplicación
 
@@ -57,6 +57,6 @@ La App 1.2 resuelve lo mismo con una arquitectura de tres capas (aplicación, dr
 ## Pendientes
 
 - **App 1.1:** incorporar el driver GPIO; hoy `main.c` llama a `HAL_GPIO_WritePin`.
-- **App 1.3:** pasar el código de `App 1.3` a `App_3_3_Grupo_6_2026` y dejar una sola carpeta.
+- **App 1.3:** borrar la carpeta `App 1.3`, que quedó duplicada.
 - **Nombres de funciones:** la App 1.3 usa `WriteLedOn_GPIO` y la App 1.4 `writeLedOn_GPIO`; la App 1.2 usa otro driver (`LED_Write`, `BOTON_DetectarFlancoPresionado`). La consigna pide unificarlos.
 - **Nombres de carpetas:** renombrar `App 1.1` a `App_3_1_Grupo_6_2026`.

@@ -50,7 +50,7 @@ Todas deben ser de carácter general: los LEDs se manejan con un vector, de modo
 | :---: | :--- | :--- | :--- |
 | **1.1** | No está en el repositorio | [`App 1.1`](AFP_3_Grupo_6_TDII/App%201.1) | [`App_4_1_Grupo_6_2026`](AFP_4_Grupo_6_TDII/App_4_1_Grupo_6_2026) |
 | **1.2** | [`App_1_2_Grupo_6_2026`](AFP_0_Grupo_6_TDII/App_1_2_Grupo_6_2026) | [`App_3_2_Grupo_6_2026`](AFP_3_Grupo_6_TDII/App_3_2_Grupo_6_2026) | [`App_4_2_Grupo_6_2026`](AFP_4_Grupo_6_TDII/App_4_2_Grupo_6_2026) |
-| **1.3** | No está en el repositorio | [`App 1.3`](AFP_3_Grupo_6_TDII/App%201.3) | [`App_4_3_Grupo_6_2026`](AFP_4_Grupo_6_TDII/App_4_3_Grupo_6_2026) |
+| **1.3** | No está en el repositorio | [`App_3_3_Grupo_6_2026`](AFP_3_Grupo_6_TDII/App_3_3_Grupo_6_2026) | [`App_4_3_Grupo_6_2026`](AFP_4_Grupo_6_TDII/App_4_3_Grupo_6_2026) |
 | **1.4** | No está en el repositorio | [`App_3_4_Grupo_6_2026`](AFP_3_Grupo_6_TDII/App_3_4_Grupo_6_2026) | [`App_4_4_Grupo_6_2026`](AFP_4_Grupo_6_TDII/App_4_4_Grupo_6_2026) |
 
 ## Convenciones del grupo
