@@ -72,16 +72,16 @@ Los nombres de variables de `main.c` también se unifican: un mismo concepto lle
 
 | App | Responsable | Placa | Carpeta |
 | :---: | :--- | :--- | :--- |
-| 1.1 | Santino Machin | NUCLEO-F429ZI | Pendiente |
+| 1.1 | Santino Machin | NUCLEO-F429ZI | [`App_5_1_Grupo_6_2026`](App_5_1_Grupo_6_2026) |
 | 1.2 | Carlos Mamani Flores | NUCLEO-F439ZI | Pendiente |
 | 1.3 | Federico Mayol | NUCLEO-F767ZI | [`App_5_3_Grupo_6_2026`](App_5_3_Grupo_6_2026) |
-| 1.4 | Lucas Emanuel Cusi | STM32F401RC | Pendiente |
+| 1.4 | Lucas Emanuel Cusi | STM32F401RC | [`App_5_4_Grupo_6_2026`](App_5_4_Grupo_6_2026) y [`App_5_4_v2_Grupo_6_2026`](App_5_4_v2_Grupo_6_2026) |
 
 ### Qué debe cumplir cada aplicación
 
 | App | Comportamiento (igual al de la AFP 0) | Tarea en esta actividad |
 | :---: | :--- | :--- |
-| 1.1 | Secuencia verde → azul → rojo, 200 ms encendido y 200 ms apagado | Usar los drivers unificados. No tiene pulsador, así que el antirrebote queda incluido sin uso. |
+| 1.1 | Secuencia verde → azul → rojo, 200 ms encendido y 200 ms apagado | Usar los drivers unificados. Como la secuencia original no usa pulsador, se agregó una función: cada pulsación pausa o reanuda la secuencia. |
 | 1.2 | La secuencia invierte su sentido con cada pulsación | Detectar la pulsación con `readKey` |
 | 1.3 | Cuatro secuencias; el pulsador pasa a la siguiente | Detectar la pulsación con `readKey` |
 | 1.4 | Parpadeo conjunto; el pulsador cambia entre 100, 250, 500 y 1000 ms | Detectar la pulsación con `readKey` |
@@ -95,6 +95,12 @@ El detalle de cada secuencia está en el [README de la AFP 0](../AFP_0_Grupo_6_T
 - En `API_debounce.c`, `buttonPressed()` y `buttonReleased()` están vacías porque los LEDs los maneja la secuencia. Para la prueba del driver que pide la consigna (invertir LED1 al presionar y LED3 al liberar) alcanza con descomentar la línea de cada una.
 - `MX_GPIO_Init()` está en `API_GPIO.c`, como indica la guía de la cátedra. Si se regenera el código desde el `.ioc`, hay que volver a quitarla de `main.c`.
 
+### App 5.4 — dos versiones
+
+- `App_5_4_Grupo_6_2026` es la versión original: funciona, pero resuelve el antirrebote con un driver propio (`API_Button`) que tiene otros nombres.
+- `App_5_4_v2_Grupo_6_2026` es la misma aplicación con los drivers unificados (`API_delay`, `API_debounce`). Los LEDs externos conservan las etiquetas `LED1`, `LED2`, `LED3`, porque en la NUCLEO-F401RE `LD2` ya es el LED integrado.
+
 ## Pendientes
 
-- Subir las Apps 5.1, 5.2 y 5.4 con los drivers y nombres unificados.
+- Subir la App 5.2.
+- Probar en la placa la App 5.4 v2 y dejar una sola versión de la 5.4.

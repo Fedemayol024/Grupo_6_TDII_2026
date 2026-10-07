@@ -24,6 +24,12 @@ Release/
 .settings/language.settings.xml
 *.launch
 
+# Descriptores sueltos en las carpetas AFP (las AFP no son proyectos)
+/AFP_*_Grupo_6_TDII/.project
+
+# Copias de trabajo de un proyecto (por ejemplo "App_4_1_Grupo_6_2026 Viejo")
+*Viejo*/
+
 # Archivos temporales y de respaldo
 *.bak
 *.tmp

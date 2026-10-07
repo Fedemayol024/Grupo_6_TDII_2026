@@ -50,10 +50,10 @@ Todas deben ser de carácter general: los LEDs se manejan con un vector, de modo
 
 | App | AFP 0 | AFP 3 | AFP 4 | AFP 5 |
 | :---: | :--- | :--- | :--- | :--- |
-| **1.1** | Pendiente | [`App_3_1`](AFP_3_Grupo_6_TDII/App_3_1_Grupo_6_2026) | [`App_4_1`](AFP_4_Grupo_6_TDII/App_4_1_Grupo_6_2026) | Pendiente |
+| **1.1** | [`App_1_1`](AFP_0_Grupo_6_TDII/App_1_1_Grupo_6_2026) | [`App_3_1`](AFP_3_Grupo_6_TDII/App_3_1_Grupo_6_2026) | [`App_4_1`](AFP_4_Grupo_6_TDII/App_4_1_Grupo_6_2026) | [`App_5_1`](AFP_5_Grupo_6_TDII/App_5_1_Grupo_6_2026) |
 | **1.2** | [`App_1_2`](AFP_0_Grupo_6_TDII/App_1_2_Grupo_6_2026) | [`App_3_2`](AFP_3_Grupo_6_TDII/App_3_2_Grupo_6_2026) | [`App_4_2`](AFP_4_Grupo_6_TDII/App_4_2_Grupo_6_2026) | Pendiente |
 | **1.3** | [`App_1_3`](AFP_0_Grupo_6_TDII/App_1_3_Grupo_6_2026) | [`App_3_3`](AFP_3_Grupo_6_TDII/App_3_3_Grupo_6_2026) | [`App_4_3`](AFP_4_Grupo_6_TDII/App_4_3_Grupo_6_2026) | [`App_5_3`](AFP_5_Grupo_6_TDII/App_5_3_Grupo_6_2026) |
-| **1.4** | [`App_1_4`](AFP_0_Grupo_6_TDII/App_1_4_Grupo_6_2026) | [`App_3_4`](AFP_3_Grupo_6_TDII/App_3_4_Grupo_6_2026) | [`App_4_4`](AFP_4_Grupo_6_TDII/App_4_4_Grupo_6_2026) | Pendiente |
+| **1.4** | [`App_1_4`](AFP_0_Grupo_6_TDII/App_1_4_Grupo_6_2026) | [`App_3_4`](AFP_3_Grupo_6_TDII/App_3_4_Grupo_6_2026) | [`App_4_4`](AFP_4_Grupo_6_TDII/App_4_4_Grupo_6_2026) | [`App_5_4`](AFP_5_Grupo_6_TDII/App_5_4_Grupo_6_2026) |
 
 Cada carpeta se llama `App_N_Y_Grupo_6_2026`; en la tabla se abrevia el nombre.
 
