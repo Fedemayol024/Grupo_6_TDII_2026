@@ -1,0 +1,237 @@
+/* USER CODE BEGIN Header */
+/**
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2026 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
+/* USER CODE END Header */
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+#include <stdbool.h>
+#include "API_led.h"
+#include "API_delay.h"
+#include "API_debounce.h"
+/* USER CODE END Includes */
+
+/* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN PTD */
+
+/**
+ * @brief Definición de estados para la MEF principal de la secuencia.
+ */
+typedef enum {
+	ESTADO_ENCENDIDO = 0,
+	ESTADO_APAGADO
+} secuenciaState_t;
+
+/* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+
+#define LED_DELAY_MS 200  /**< Tiempo de transición para el parpadeo de los LEDs. */
+
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
+UART_HandleTypeDef huart3;
+
+/* USER CODE BEGIN PV */
+
+/**
+ * @brief Arreglo de descriptores de LEDs utilizando nuestro driver API_led.
+ * @details Desacopla completamente el hardware mediante la estructura led_t.
+ */
+static led_t leds_array[] = {
+		{LD1_GPIO_Port, LD1_Pin, LED_LOGIC_ACTIVE_HIGH},
+		{LD2_GPIO_Port, LD2_Pin, LED_LOGIC_ACTIVE_HIGH},
+		{LD3_GPIO_Port, LD3_Pin, LED_LOGIC_ACTIVE_HIGH}
+};
+
+static const uint8_t cant_leds = sizeof(leds_array) / sizeof(leds_array[0]);
+
+/* Instancia del botón de usuario utilizando API_debounce */
+static button_t user_button;
+
+/* Instancia del retardo no bloqueante utilizando API_delay */
+static delay_t led_timer;
+
+/* Variables de control de la secuencia */
+static int indice = 0;
+static secuenciaState_t estado_secuencia = ESTADO_ENCENDIDO;
+static int8_t sentido = 1;  // Dirección del recorrido de los LEDs (1 o -1)
+
+/* USER CODE END PV */
+
+/* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_USART3_UART_Init(void);
+/* USER CODE BEGIN PFP */
+
+/* USER CODE END PFP */
+
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+
+/* USER CODE END 0 */
+
+/**
+ * @brief  The application entry point.
+ * @retval int
+ */
+int main(void)
+{
+
+	/* USER CODE BEGIN 1 */
+
+	/* USER CODE END 1 */
+
+	/* MCU Configuration--------------------------------------------------------*/
+
+	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	HAL_Init();
+
+	/* USER CODE BEGIN Init */
+
+	/* USER CODE END Init */
+
+	/* Configure the system clock */
+	SystemClock_Config();
+
+	/* USER CODE BEGIN SysInit */
+
+	/* USER CODE END SysInit */
+
+	/* Initialize all configured peripherals */
+	MX_GPIO_Init();
+	MX_USART3_UART_Init();
+	/* USER CODE BEGIN 2 */
+
+
+	/* Inicialización de nuestros objetos de drivers propios */
+	delayInit(&led_timer, LED_DELAY_MS);
+
+	/* Configuración del botón de usuario (Asumiendo Active High para el botón azul de la Nucleo) */
+	user_button.port = USER_BTN_GPIO_Port;
+	user_button.pin = USER_BTN_Pin;
+	user_button.inverted = false;
+	debounceFSM_Init(&user_button);
+
+	/* USER CODE END 2 */
+
+	/* Infinite loop */
+	/* USER CODE BEGIN WHILE */
+	while (1)
+	{
+		/* USER CODE END WHILE */
+
+		/* USER CODE BEGIN 3 */
+
+		/* 1. Actualización periódica de la MEF del Botón (Antirrebote no bloqueante) */
+		debounceFSM_Update(&user_button);
+
+		/* 2. Detección de pulsación confirmada con Clear-on-Read */
+		if (readKey(&user_button)) {
+			sentido *= -1; // Inversión de dirección del recorrido
+		}
+
+		/* 3. Máquina de Estados Finitos (MEF) para la secuencia de LEDs basada en tiempos no bloqueantes */
+		switch (estado_secuencia) {
+		case ESTADO_ENCENDIDO:
+			// Encendemos el LED actual utilizando el driver API_led
+			LED_On(&leds_array[indice]);
+
+			// Esperamos el tiempo configurado de forma no bloqueante
+			if (delayRead(&led_timer)) {
+				estado_secuencia = ESTADO_APAGADO;
+			}
+			break;
+
+		case ESTADO_APAGADO:
+			// Apagamos el LED actual mediante API_led
+			LED_Off(&leds_array[indice]);
+
+			if (delayRead(&led_timer)) {
+				// Actualización del índice según la dirección actual (sentido)
+				indice += sentido;
+
+				// Lógica circular para mantener el índice dentro de los límites del arreglo
+				if (indice >= cant_leds) {
+					indice = 0;
+				} else if (indice < 0) {
+					indice = cant_leds - 1;
+				}
+
+				estado_secuencia = ESTADO_ENCENDIDO;
+			}
+			break;
+
+		default:
+			// Recuperación ante estados indeterminados
+			LED_All_Off(leds_array, cant_leds);
+			estado_secuencia = ESTADO_ENCENDIDO;
+			indice = 0;
+			delayReset(&led_timer);
+			break;
+		}
+
+	}
+	/* USER CODE END 3 */
+}
+
+
+
+/* USER CODE BEGIN 4 */
+
+/* USER CODE END 4 */
+
+/**
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
+void Error_Handler(void)
+{
+	/* USER CODE BEGIN Error_Handler_Debug */
+	/* User can add his own implementation to report the HAL error return state */
+	__disable_irq();
+	while (1)
+	{
+	}
+	/* USER CODE END Error_Handler_Debug */
+}
+#ifdef USE_FULL_ASSERT
+/**
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
+void assert_failed(uint8_t *file, uint32_t line)
+{
+	/* USER CODE BEGIN 6 */
+	/* User can add his own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+	/* USER CODE END 6 */
+}
+#endif /* USE_FULL_ASSERT */
