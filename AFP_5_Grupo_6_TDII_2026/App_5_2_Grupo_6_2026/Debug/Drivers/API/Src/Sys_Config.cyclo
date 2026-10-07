@@ -1,3 +1,0 @@
-../Drivers/API/Src/Sys_Config.c:22:6:SystemClock_Config	4
-../Drivers/API/Src/Sys_Config.c:66:6:MX_USART3_UART_Init	2
-../Drivers/API/Src/Sys_Config.c:86:6:MX_GPIO_Init	1

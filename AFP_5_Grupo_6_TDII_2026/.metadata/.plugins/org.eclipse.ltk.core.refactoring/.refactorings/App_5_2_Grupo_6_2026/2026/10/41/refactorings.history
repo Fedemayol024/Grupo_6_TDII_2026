@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;App_5_2_Grupo_6_2026/Drivers/custom_drivers&apos; to &apos;APIS&apos;" description="Rename resource &apos;custom_drivers&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Drivers/custom_drivers" name="APIS" stamp="1791395309513" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;App_5_2_Grupo_6_2026/Drivers/APIS&apos; to &apos;API&apos;" description="Rename resource &apos;APIS&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Drivers/APIS" name="API" stamp="1791395507273" updateReferences="true"/>
-</session>
