@@ -1,0 +1,53 @@
+# ------------------------------------------------------------------
+# .gitignore - Grupo 6 - Tecnicas Digitales II - UTN FRT - 2026
+# Proyectos STM32CubeIDE
+# ------------------------------------------------------------------
+
+# Espacio de trabajo del IDE (propio de cada computadora)
+.metadata/
+RemoteSystemsTempFiles/
+
+# Resultados de compilacion (se regeneran al compilar)
+Debug/
+Release/
+*.o
+*.d
+*.su
+*.cyclo
+*.elf
+*.map
+*.list
+*.bin
+*.hex
+
+# Configuracion local del IDE
+.settings/language.settings.xml
+*.launch
+
+# Descriptores sueltos en las carpetas AFP (las AFP no son proyectos)
+/AFP_*_Grupo_6_TDII/.project
+
+# Copias de trabajo de un proyecto (por ejemplo "App_4_1_Grupo_6_2026 Viejo")
+*Viejo*/
+
+# Archivos temporales y de respaldo
+*.bak
+*.tmp
+*~
+~$*
+
+# Comprimidos (subir el proyecto, no el archivo comprimido)
+*.rar
+*.zip
+*.7z
+
+# Sistema operativo
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ------------------------------------------------------------------
+# NO ignorar: hacen falta para abrir y compilar cada proyecto
+#   .project  .cproject  .mxproject  *.ioc  *.ld
+#   Core/  Drivers/  (incluye CMSIS y la HAL de ST)
+# ------------------------------------------------------------------

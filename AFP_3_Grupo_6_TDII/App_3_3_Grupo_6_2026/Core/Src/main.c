@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "API_GPIO.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -31,7 +31,15 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+int Contador;
 
+#define LED1 LD1_Pin
+#define LED2 LD2_Pin
+#define LED3 LD3_Pin
+
+uint32_t tiempo_led1 = 0;
+uint32_t tiempo_led2 = 0;
+uint32_t tiempo_led3 = 0;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -50,7 +58,7 @@ UART_HandleTypeDef huart3;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MPU_Config(void);
-static void MX_GPIO_Init(void);
+//void MX_GPIO_Init(void);   // Pasa al driver API_GPIO
 static void MX_USART3_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
@@ -100,14 +108,157 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
+Reinicio:
+WriteLedOff_GPIO(LED1);
+WriteLedOff_GPIO(LED2);
+WriteLedOff_GPIO(LED3);
+  Contador = 0; //Reinicia el valor del contador.
+    while (1)
+    {
+    	while (ReadButton_GPIO()==GPIO_PIN_RESET && Contador==0)
+    	{
 
-    /* USER CODE BEGIN 3 */
-  }
+    	}
+    	if(Contador==0){Contador  ++;}
+        if(Contador==1)
+        {
+        	ToggleLed_GPIO(LED1);
+        	HAL_Delay(150);
+        	ToggleLed_GPIO(LED2);
+        	HAL_Delay(150);
+        	ToggleLed_GPIO(LED3);
+        	HAL_Delay(150);
+        	ToggleLed_GPIO(LED1);
+            HAL_Delay(150);
+            ToggleLed_GPIO(LED2);
+            HAL_Delay(150);
+            ToggleLed_GPIO(LED3);
+            HAL_Delay(150);
+            uint32_t tiempo_inicio = HAL_GetTick(); // Tomamos la "foto" del tiempo actual
+            while ((HAL_GetTick() - tiempo_inicio) < 1000) // Corre en bucle por exactamente 3000 ms
+                      {
+                          if (ReadButton_GPIO() == GPIO_PIN_SET)
+                          {
+                            Contador++;    // Sumamos 1 al Contador de la placa
+                            HAL_Delay(300); // Anti Rebote.
+                          }
+                      }
+        }
+        if(Contador==2)
+                {
+        	ToggleLed_GPIO(LED1);
+        	ToggleLed_GPIO(LED2);
+        	ToggleLed_GPIO(LED3);
+                	HAL_Delay(300);
+            ToggleLed_GPIO(LED1);
+            ToggleLed_GPIO(LED2);
+            ToggleLed_GPIO(LED3);
+                    HAL_Delay(300);
+            uint32_t tiempo_inicio = HAL_GetTick(); // Tomamos la "foto" del tiempo actual
+                    while ((HAL_GetTick() - tiempo_inicio) < 1000) // Corre en bucle por exactamente 3000 ms
+                              {
+                                  if (ReadButton_GPIO() == GPIO_PIN_SET)
+                                  {
+                                    Contador++;    // Sumamos 1 al Contador de la placa
+                                    HAL_Delay(300); // Anti Rebote.
+                                  }
+                              }
+                }
+        if(Contador == 3)
+        {
+            // 1. Inicializamos los cronómetros para los 3 segundos y para cada LED
+            uint32_t tiempo_inicio = HAL_GetTick();
+            uint32_t tiempo_led1   = tiempo_inicio;
+            uint32_t tiempo_led2   = tiempo_inicio;
+            uint32_t tiempo_led3   = tiempo_inicio;
+
+            // 2. Ventana de análisis de 3000 ms
+            while ((HAL_GetTick() - tiempo_inicio) < 3000)
+            {
+                uint32_t ahora = HAL_GetTick();
+
+                // LED1: Alternancia cada 100 ms
+                if (ahora - tiempo_led1 >= 100) {
+                    tiempo_led1 = ahora;
+                    ToggleLed_GPIO(LED1);
+                }
+                // LED2: Alternancia cada 300 ms
+                if (ahora - tiempo_led2 >= 300) {
+                    tiempo_led2 = ahora;
+                    ToggleLed_GPIO(LED2);
+                }
+                // LED3: Alternancia cada 600 ms
+                if (ahora - tiempo_led3 >= 600) {
+                    tiempo_led3 = ahora;
+                    ToggleLed_GPIO(LED3);
+                }
+            }
+            WriteLedOff_GPIO(LED1);
+            WriteLedOff_GPIO(LED2);
+            WriteLedOff_GPIO(LED3);
+        }
+                    uint32_t tiempo_inicio = HAL_GetTick(); // Tomamos la "foto" del tiempo actual
+                    while ((HAL_GetTick() - tiempo_inicio) < 1000) // Corre en bucle por exactamente 3000 ms
+                              {
+                                  if (ReadButton_GPIO() == GPIO_PIN_SET)
+                                  {
+                                    Contador++;    // Sumamos 1 al Contador de la placa
+                                    HAL_Delay(300); // Anti Rebote.
+                                  }
+                              }
+                    if(Contador == 4)
+                    {
+                        // LED1 (Verde) y LED3 (Rojo) ENCENDIDOS. LED2 (Azul) APAGADO.
+                    	WriteLedOn_GPIO(LED1);
+                    	WriteLedOn_GPIO(LED3);
+                    	WriteLedOff_GPIO(LED2);
+
+                        // 2. Inicializamos cronómetros
+                        uint32_t tiempo_inicio = HAL_GetTick();
+                        uint32_t tiempo_led    = tiempo_inicio; // Un solo cronómetro para los tres leds ya que van al mismo ritmo
+
+                        uint8_t boton_listo = 1; // Flag para contar un solo clic por pulsación
+
+                        // 3. Ventana de análisis de 3000 ms
+                        while ((HAL_GetTick() - tiempo_inicio) < 3000)
+                        {
+                            uint32_t ahora = HAL_GetTick();
+                            if (ahora - tiempo_led >= 150)
+                            {
+                                tiempo_led = ahora;
+
+                                // Truco: Al hacerle toggle a los tres juntos, los que estaban en 1 pasan a 0
+                                // y el que estaba en 0 pasa a 1. Se mantiene la inversión perfecta.
+                                ToggleLed_GPIO(LED1);
+                                ToggleLed_GPIO(LED2);
+                                ToggleLed_GPIO(LED3);
+                            }
+
+                            if (ReadButton_GPIO() == GPIO_PIN_SET)
+                            {
+                                if (boton_listo)
+                                {
+                                    Contador++;       // Sumamos al Contador de la placa
+                                    boton_listo = 0;  // Bloqueamos para evitar falsos conteos
+                                }
+                            }
+                            else
+                            {
+                                boton_listo = 1; // Queda listo para el próximo toque al soltarlo
+                            }
+
+                            HAL_Delay(10); // Margen de estabilidad para el bucle
+                        }
+                    }
+if (Contador>=5)
+{goto Reinicio;}
+
+
+
+                }
+    }
+    /* USER CODE END WHILE */
   /* USER CODE END 3 */
-}
 
 /**
   * @brief System Clock Configuration
@@ -199,109 +350,6 @@ static void MX_USART3_UART_Init(void)
 
   /* USER CODE END USART3_Init 2 */
 
-}
-
-/**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_GPIO_Init(void)
-{
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
-  /* USER CODE BEGIN MX_GPIO_Init_1 */
-
-  /* USER CODE END MX_GPIO_Init_1 */
-
-  /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOC_CLK_ENABLE();
-  __HAL_RCC_GPIOH_CLK_ENABLE();
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOB_CLK_ENABLE();
-  __HAL_RCC_GPIOD_CLK_ENABLE();
-  __HAL_RCC_GPIOG_CLK_ENABLE();
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, LD1_Pin|LD3_Pin|LD2_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(USB_PowerSwitchOn_GPIO_Port, USB_PowerSwitchOn_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin : USER_Btn_Pin */
-  GPIO_InitStruct.Pin = USER_Btn_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(USER_Btn_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : RMII_MDC_Pin RMII_RXD0_Pin RMII_RXD1_Pin */
-  GPIO_InitStruct.Pin = RMII_MDC_Pin|RMII_RXD0_Pin|RMII_RXD1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF11_ETH;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : RMII_REF_CLK_Pin RMII_MDIO_Pin RMII_CRS_DV_Pin */
-  GPIO_InitStruct.Pin = RMII_REF_CLK_Pin|RMII_MDIO_Pin|RMII_CRS_DV_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF11_ETH;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : LD1_Pin LD3_Pin LD2_Pin */
-  GPIO_InitStruct.Pin = LD1_Pin|LD3_Pin|LD2_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : RMII_TXD1_Pin */
-  GPIO_InitStruct.Pin = RMII_TXD1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF11_ETH;
-  HAL_GPIO_Init(RMII_TXD1_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : USB_PowerSwitchOn_Pin */
-  GPIO_InitStruct.Pin = USB_PowerSwitchOn_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(USB_PowerSwitchOn_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : USB_OverCurrent_Pin */
-  GPIO_InitStruct.Pin = USB_OverCurrent_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(USB_OverCurrent_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : USB_SOF_Pin USB_ID_Pin USB_DM_Pin USB_DP_Pin */
-  GPIO_InitStruct.Pin = USB_SOF_Pin|USB_ID_Pin|USB_DM_Pin|USB_DP_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF10_OTG_FS;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : USB_VBUS_Pin */
-  GPIO_InitStruct.Pin = USB_VBUS_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(USB_VBUS_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : RMII_TX_EN_Pin RMII_TXD0_Pin */
-  GPIO_InitStruct.Pin = RMII_TX_EN_Pin|RMII_TXD0_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF11_ETH;
-  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
-
-  /* USER CODE BEGIN MX_GPIO_Init_2 */
-
-  /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
