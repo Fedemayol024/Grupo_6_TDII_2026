@@ -63,8 +63,14 @@ La consigna pide además que todo el grupo use **el mismo nombre para el driver 
 
 El detalle de cada secuencia está en el [README de la AFP 0](../AFP_0_Grupo_6_TDII).
 
-## Pendientes
+## Estado
 
-- **Nombre del driver:** hoy hay tres (`header`/`fuente`, `nb_delay` y `API_Delay`) y la App 1.2 usa `nb_delay_init`/`nb_delay_read`/`nb_delay_write` en lugar de `delayInit`/`delayRead`/`delayWrite`. Se unifican en la [AFP 5](../AFP_5_Grupo_6_TDII) como `API_delay`.
+Las cuatro aplicaciones están entregadas y presentadas.
+
+## Observaciones
+
+Se conservan como se presentaron:
+
+- **Nombre del driver:** hoy hay tres (`header`/`fuente`, `nb_delay` y `API_Delay`) y la App 1.2 usa `nb_delay_init`/`nb_delay_read`/`nb_delay_write` en lugar de `delayInit`/`delayRead`/`delayWrite`. En la [AFP 5](../AFP_5_Grupo_6_TDII) se unificó como `API_delay`.
 - **App 1.1:** todavía maneja los LEDs con `HAL_GPIO_WritePin` en lugar del driver GPIO de la AFP 3.
-- **App 1.3:** la secuencia 4 lee el LED con `HAL_GPIO_ReadPin`; se puede resolver solo con el driver.
+- **App 1.3:** la secuencia 4 lee el LED con `HAL_GPIO_ReadPin`; podría resolverse solo con el driver.

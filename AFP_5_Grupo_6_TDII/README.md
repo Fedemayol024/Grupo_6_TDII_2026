@@ -58,7 +58,7 @@ if (readKey())
 
 ## Drivers unificados
 
-Desde esta actividad, los cuatro proyectos usan los mismos tres drivers en `Drivers/API/Inc` y `Drivers/API/Src`:
+Para esta actividad el grupo acordó tres drivers comunes, en `Drivers/API/Inc` y `Drivers/API/Src`. Los usan las Apps 5.1, 5.3 y 5.4 v2:
 
 | Driver | Qué resuelve | Funciones |
 | :--- | :--- | :--- |
@@ -73,7 +73,7 @@ Los nombres de variables de `main.c` también se unifican: un mismo concepto lle
 | App | Responsable | Placa | Carpeta |
 | :---: | :--- | :--- | :--- |
 | 1.1 | Santino Machin | NUCLEO-F429ZI | [`App_5_1_Grupo_6_2026`](App_5_1_Grupo_6_2026) |
-| 1.2 | Carlos Mamani Flores | NUCLEO-F439ZI | Pendiente |
+| 1.2 | Carlos Mamani Flores | NUCLEO-F439ZI | [`App_5_2_Grupo_6_2026`](App_5_2_Grupo_6_2026) |
 | 1.3 | Federico Mayol | NUCLEO-F767ZI | [`App_5_3_Grupo_6_2026`](App_5_3_Grupo_6_2026) |
 | 1.4 | Lucas Emanuel Cusi | STM32F401RC | [`App_5_4_Grupo_6_2026`](App_5_4_Grupo_6_2026) y [`App_5_4_v2_Grupo_6_2026`](App_5_4_v2_Grupo_6_2026) |
 
@@ -88,6 +88,13 @@ Los nombres de variables de `main.c` también se unifican: un mismo concepto lle
 
 El detalle de cada secuencia está en el [README de la AFP 0](../AFP_0_Grupo_6_TDII).
 
+### App 5.2 — detalle
+
+- Mantiene la arquitectura en capas de la App 1.2: los LEDs y el pulsador se describen con estructuras (`led_t`, `button_t`) que guardan puerto, pin y polaridad.
+- Drivers propios: `API_led` (`LED_On`, `LED_Off`, `LED_Toggle`, `LED_All_Off`…), `API_delay` (`delayInit`, `delayRead`, `delayWrite` y `delayReset`) y `API_debounce`, que recibe el botón como parámetro: `debounceFSM_Init(&btn)`, `debounceFSM_Update(&btn)`, `readKey(&btn)`. Así el mismo driver puede atender varios pulsadores.
+- La secuencia avanza cada 200 ms (`LED_DELAY_MS`) y cada pulsación confirmada invierte la variable `sentido`.
+- El detalle completo está en su propio [README](App_5_2_Grupo_6_2026/README.md).
+
 ### App 5.3 — detalle
 
 - `main.c` tiene dos funciones: `iniciarSecuencia()`, que apaga los LEDs y prepara la secuencia elegida, y `actualizarSecuencia()`, que ejecuta un paso sin bloquear.
@@ -100,7 +107,11 @@ El detalle de cada secuencia está en el [README de la AFP 0](../AFP_0_Grupo_6_T
 - `App_5_4_Grupo_6_2026` es la versión original: funciona, pero resuelve el antirrebote con un driver propio (`API_Button`) que tiene otros nombres.
 - `App_5_4_v2_Grupo_6_2026` es la misma aplicación con los drivers unificados (`API_delay`, `API_debounce`). Los LEDs externos conservan las etiquetas `LED1`, `LED2`, `LED3`, porque en la NUCLEO-F401RE `LD2` ya es el LED integrado.
 
-## Pendientes
+## Estado
 
-- Subir la App 5.2.
-- Probar en la placa la App 5.4 v2 y dejar una sola versión de la 5.4.
+Las cuatro aplicaciones están entregadas y presentadas.
+
+## Observaciones
+
+- **App 5.2:** no usa los nombres unificados (`API_led` en lugar de `API_GPIO`, y funciones del antirrebote con el botón como parámetro); se dejó tal como se presentó.
+- **App 5.4:** quedan en el repositorio las dos versiones, la original y la v2 con los drivers unificados.

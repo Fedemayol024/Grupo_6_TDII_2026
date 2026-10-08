@@ -51,17 +51,17 @@ Todas deben ser de carácter general: los LEDs se manejan con un vector, de modo
 | App | AFP 0 | AFP 3 | AFP 4 | AFP 5 |
 | :---: | :--- | :--- | :--- | :--- |
 | **1.1** | [`App_1_1`](AFP_0_Grupo_6_TDII/App_1_1_Grupo_6_2026) | [`App_3_1`](AFP_3_Grupo_6_TDII/App_3_1_Grupo_6_2026) | [`App_4_1`](AFP_4_Grupo_6_TDII/App_4_1_Grupo_6_2026) | [`App_5_1`](AFP_5_Grupo_6_TDII/App_5_1_Grupo_6_2026) |
-| **1.2** | [`App_1_2`](AFP_0_Grupo_6_TDII/App_1_2_Grupo_6_2026) | [`App_3_2`](AFP_3_Grupo_6_TDII/App_3_2_Grupo_6_2026) | [`App_4_2`](AFP_4_Grupo_6_TDII/App_4_2_Grupo_6_2026) | AFP_5_Grupo_6_TDII/App_5_2_Grupo_6_2026|
+| **1.2** | [`App_1_2`](AFP_0_Grupo_6_TDII/App_1_2_Grupo_6_2026) | [`App_3_2`](AFP_3_Grupo_6_TDII/App_3_2_Grupo_6_2026) | [`App_4_2`](AFP_4_Grupo_6_TDII/App_4_2_Grupo_6_2026) | [`App_5_2`](AFP_5_Grupo_6_TDII/App_5_2_Grupo_6_2026) |
 | **1.3** | [`App_1_3`](AFP_0_Grupo_6_TDII/App_1_3_Grupo_6_2026) | [`App_3_3`](AFP_3_Grupo_6_TDII/App_3_3_Grupo_6_2026) | [`App_4_3`](AFP_4_Grupo_6_TDII/App_4_3_Grupo_6_2026) | [`App_5_3`](AFP_5_Grupo_6_TDII/App_5_3_Grupo_6_2026) |
 | **1.4** | [`App_1_4`](AFP_0_Grupo_6_TDII/App_1_4_Grupo_6_2026) | [`App_3_4`](AFP_3_Grupo_6_TDII/App_3_4_Grupo_6_2026) | [`App_4_4`](AFP_4_Grupo_6_TDII/App_4_4_Grupo_6_2026) | [`App_5_4`](AFP_5_Grupo_6_TDII/App_5_4_Grupo_6_2026) |
 
-Cada carpeta se llama `App_N_Y_Grupo_6_2026`; en la tabla se abrevia el nombre.
+Las **16 aplicaciones están entregadas y presentadas** ante la cátedra. Cada carpeta se llama `App_N_Y_Grupo_6_2026`; en la tabla se abrevia el nombre.
 
 ## Convenciones del grupo
 
 **Nombres de carpetas.** Una carpeta por actividad (`AFP_N_Grupo_6_TDII`) y, dentro, una por aplicación con el formato `App_N_Y_Grupo_6_2026`, donde `N` es el número de AFP e `Y` el número de aplicación (1 a 4).
 
-**Drivers propios.** Van en `Drivers/API/Inc` y `Drivers/API/Src` de cada proyecto. Desde la AFP 5 son los mismos tres archivos en todas las aplicaciones: `API_GPIO`, `API_delay` y `API_debounce`.
+**Drivers propios.** Van en `Drivers/API/Inc` y `Drivers/API/Src` de cada proyecto. En la AFP 5 se acordaron tres drivers comunes: `API_GPIO`, `API_delay` y `API_debounce`. Las Apps 5.1, 5.3 y 5.4 v2 los usan; la 5.2 mantiene su propia arquitectura (`API_led`, `API_delay`, `API_debounce` con descriptores), explicada en su README.
 
 **Arquitectura en capas.** La lógica de la aplicación no accede directamente al hardware:
 

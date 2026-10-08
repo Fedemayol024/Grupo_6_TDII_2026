@@ -52,6 +52,10 @@ buttonStatus_t readButton_GPIO(void);        /* Devuelve el estado del pulsador 
 
 La App 1.2 resuelve lo mismo con una arquitectura de tres capas (aplicación, drivers genéricos y capa de abstracción de plataforma); está explicada en su propio [README](App_3_2_Grupo_6_2026/README.md).
 
-## Pendientes
+## Estado
 
-- **Nombres de funciones:** las Apps 1.1 y 1.4 usan los nombres de la guía de la cátedra (`writeLedOn_GPIO`); la App 1.3 los tiene con mayúscula inicial (`WriteLedOn_GPIO`) y la App 1.2 usa otro driver (`LED_Write`, `BOTON_DetectarFlancoPresionado`). Se unifican en la [AFP 5](../AFP_5_Grupo_6_TDII).
+Las cuatro aplicaciones están entregadas y presentadas.
+
+## Observaciones
+
+- **Nombres de funciones:** las Apps 1.1 y 1.4 usan los nombres de la guía de la cátedra (`writeLedOn_GPIO`); la App 1.3 los tiene con mayúscula inicial (`WriteLedOn_GPIO`) y la App 1.2 usa otro driver (`LED_Write`, `BOTON_DetectarFlancoPresionado`). Se conservan como se presentaron; la unificación se hizo en la [AFP 5](../AFP_5_Grupo_6_TDII).

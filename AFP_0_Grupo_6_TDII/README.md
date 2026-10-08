@@ -49,6 +49,6 @@ El pulsador pasa de una secuencia a la siguiente; después de la cuarta vuelve a
 
 Los tres LEDs parpadean juntos. Cada pulsación cambia el tiempo de alternancia: 100 ms → 250 ms → 500 ms → 1000 ms, y vuelve a 100 ms.
 
-## Pendientes
+## Estado
 
-- Ninguno: están las cuatro aplicaciones.
+Las cuatro aplicaciones están entregadas y presentadas.
